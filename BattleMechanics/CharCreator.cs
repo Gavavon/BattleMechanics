@@ -38,7 +38,7 @@ namespace BattleMechanics
             this.Health = 0;
             this.Speed = 0;
             this.ID = generateID();
-            this.Class = 0;
+            this.Class = "";
         }
 
         /// <summary>
