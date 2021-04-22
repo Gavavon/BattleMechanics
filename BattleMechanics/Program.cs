@@ -87,11 +87,11 @@ namespace FightingCombatTest
                 {
                     if (j == 0){Console.WriteLine("Please input the Attacker: ");}
                     else {Console.WriteLine("Please input the Defender: ");}
-                    string attackerID = Console.ReadLine();
+                    string participantsID = Console.ReadLine();
                     //check if the hero id is in the list
                     for (int i = 0; i < heroes.Count; i++)
                     {
-                        if (attackerID.Equals(heroes[i].ID))
+                        if (participantsID.Equals(heroes[i].ID))
                         {
                             participants[j].ID = (heroes[i].ID);
                             participants[j].Attack = (heroes[i].Attack);
@@ -131,7 +131,9 @@ namespace FightingCombatTest
                 if (response.Equals("CheckDur"))
                 {
                     Console.WriteLine("");
-                    checkDur();
+                    int counter = 0;
+                    counter = checkDur(defender.Health, counter);
+                    Console.WriteLine("After " + counter + " turns the Defender now has 0 health");
                     cleared = false;
                 }
                 if (response.Equals("Battle"))
@@ -239,20 +241,22 @@ namespace FightingCombatTest
 
         /// <summary>
         /// The checkDur has the attacker attack the defender to test combat duration
-        /// it will count up every turn until the defender is dead
+        /// This method utilizes recursion to return counter instead of a simple wh
         /// the point is to test how long combat would last and how many hits it would take against different classes
         /// </summary>
-        public static void checkDur()
+        public static int checkDur(int health, int counter)
         {
-            int counter = 0;
-            while (defender.Health > 0)
+            if (health <= 0)
             {
-                Console.WriteLine("Defender's current health: " + defender.Health);
-                counter += 1;
-                defender.Health = (runDamage(attacker.Attack, defender.Defense, defender.Health, 1));
+                return counter;
             }
-
-            Console.WriteLine("After " + counter + " turns the Defender now has 0 health");
+            else 
+            {
+                Console.WriteLine("Defender's current health: " + health);
+                counter += 1;
+                health = (runDamage(attacker.Attack, defender.Defense, health, 1));
+                return checkDur(health, counter);
+            }
         }
 
         /// <summary>

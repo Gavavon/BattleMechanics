@@ -11,3 +11,16 @@ C:\Users\Gavin\source\repos\BattleMechanics\BattleMechanics\obj\Debug\netcoreapp
 C:\Users\Gavin\source\repos\BattleMechanics\BattleMechanics\obj\Debug\netcoreapp3.1\BattleMechanics.dll
 C:\Users\Gavin\source\repos\BattleMechanics\BattleMechanics\obj\Debug\netcoreapp3.1\BattleMechanics.pdb
 C:\Users\Gavin\source\repos\BattleMechanics\BattleMechanics\obj\Debug\netcoreapp3.1\BattleMechanics.genruntimeconfig.cache
+C:\Users\Gavin\Documents\GitHub\BattleMechanics\BattleMechanics\BattleMechanics\bin\Debug\netcoreapp3.1\BattleMechanics.exe
+C:\Users\Gavin\Documents\GitHub\BattleMechanics\BattleMechanics\BattleMechanics\bin\Debug\netcoreapp3.1\BattleMechanics.deps.json
+C:\Users\Gavin\Documents\GitHub\BattleMechanics\BattleMechanics\BattleMechanics\bin\Debug\netcoreapp3.1\BattleMechanics.runtimeconfig.json
+C:\Users\Gavin\Documents\GitHub\BattleMechanics\BattleMechanics\BattleMechanics\bin\Debug\netcoreapp3.1\BattleMechanics.runtimeconfig.dev.json
+C:\Users\Gavin\Documents\GitHub\BattleMechanics\BattleMechanics\BattleMechanics\bin\Debug\netcoreapp3.1\BattleMechanics.dll
+C:\Users\Gavin\Documents\GitHub\BattleMechanics\BattleMechanics\BattleMechanics\bin\Debug\netcoreapp3.1\BattleMechanics.pdb
+C:\Users\Gavin\Documents\GitHub\BattleMechanics\BattleMechanics\BattleMechanics\obj\Debug\netcoreapp3.1\BattleMechanics.csprojAssemblyReference.cache
+C:\Users\Gavin\Documents\GitHub\BattleMechanics\BattleMechanics\BattleMechanics\obj\Debug\netcoreapp3.1\BattleMechanics.AssemblyInfoInputs.cache
+C:\Users\Gavin\Documents\GitHub\BattleMechanics\BattleMechanics\BattleMechanics\obj\Debug\netcoreapp3.1\BattleMechanics.AssemblyInfo.cs
+C:\Users\Gavin\Documents\GitHub\BattleMechanics\BattleMechanics\BattleMechanics\obj\Debug\netcoreapp3.1\BattleMechanics.csproj.CoreCompileInputs.cache
+C:\Users\Gavin\Documents\GitHub\BattleMechanics\BattleMechanics\BattleMechanics\obj\Debug\netcoreapp3.1\BattleMechanics.dll
+C:\Users\Gavin\Documents\GitHub\BattleMechanics\BattleMechanics\BattleMechanics\obj\Debug\netcoreapp3.1\BattleMechanics.pdb
+C:\Users\Gavin\Documents\GitHub\BattleMechanics\BattleMechanics\BattleMechanics\obj\Debug\netcoreapp3.1\BattleMechanics.genruntimeconfig.cache

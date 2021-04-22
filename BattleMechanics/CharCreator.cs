@@ -33,12 +33,12 @@ namespace BattleMechanics
         /// </summary>
         public CharCreator()
         {
-            this.Attack = Attack;
-            this.Defense = Defense;
-            this.Health = Health;
-            this.Speed = Speed;
+            this.Attack = 0;
+            this.Defense = 0;
+            this.Health = 0;
+            this.Speed = 0;
             this.ID = generateID();
-            this.Class = Class;
+            this.Class = 0;
         }
 
         /// <summary>
