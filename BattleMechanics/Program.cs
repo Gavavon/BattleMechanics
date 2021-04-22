@@ -23,7 +23,18 @@ using BattleMechanics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+//--IMPORTANT---
+/*  thisenables a user to create various kinds of classes for battle. 
+ *  You do not know at compile time which specific classes the user will create. 
+ *  However, the application has to keep track of all the various types of classes that are created, 
+ *  and it has to update them in response to user mouse actions.
+ * 
+ * This is how you will implment polymorphism via allowing the user to choose what class they want to create instead of creating a selection 
+ * 
+ * implement different combat mechanics
+ * 
+ * implement a minimax tree for combat
+ */
 namespace FightingCombatTest
 {
     /// <summary>
