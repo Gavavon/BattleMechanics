@@ -37,8 +37,13 @@ namespace BattleMechanics
             this.Defense = 0;
             this.Health = 0;
             this.Speed = 0;
-            this.ID = generateID();
+            this.ID = "";
             this.Class = "";
+        }
+
+        public virtual void defineChar(CharCreator temp) 
+        {
+            temp.ID = generateID();
         }
 
         /// <summary>

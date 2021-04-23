@@ -9,11 +9,7 @@ namespace BattleMechanics
     /// </summary>
     class Assassin : CharCreator
     {
-        /// <summary>
-        /// the constructor assigns values to the stats of the CharCreator object
-        /// it randomly generates assassin characters
-        /// </summary>
-        public Assassin()
+        public override void defineChar(CharCreator temp)
         {
             int[] highStats = new int[] { 4, 3, 2 };
             int[] lowStats = new int[] { 0, 1, 2 };
@@ -21,11 +17,12 @@ namespace BattleMechanics
             randomizeArray(highStats);
             randomizeArray(lowStats);
 
-            this.Attack = attackStats[highStats[0]];
-            this.Speed = speedStats[highStats[1]];
-            this.Defense = defenseStats[lowStats[0]];
-            this.Health = healthStats[lowStats[1]];
-            this.Class = "Assassin";
+            temp.Attack = attackStats[highStats[0]];
+            temp.Speed = speedStats[highStats[1]];
+            temp.Defense = defenseStats[lowStats[0]];
+            temp.Health = healthStats[lowStats[1]];
+            base.defineChar(temp);
+            temp.Class = "Assassin";
         }
     }
     /* Design Plan

@@ -9,11 +9,7 @@ namespace BattleMechanics
     /// </summary>
     class Tank : CharCreator
     {
-        /// <summary>
-        /// the constructor assigns values to the stats of the CharCreator object
-        /// it randomly generates tank characters
-        /// </summary>
-        public Tank()
+        public override void defineChar(CharCreator temp)
         {
             int[] highStats = new int[] { 4, 3, 2 };
             int[] lowStats = new int[] { 0, 1, 2 };
@@ -26,6 +22,7 @@ namespace BattleMechanics
             this.Defense = defenseStats[highStats[0]];
             this.Health = healthStats[highStats[1]];
             this.Class = "Tank";
+            base.defineChar(temp);
         }
     }
 

@@ -6,7 +6,7 @@ namespace BattleMechanics
 {
     class Healer : CharCreator
     {
-        public Healer()
+        public override void defineChar(CharCreator temp)
         {
             int[] highStats = new int[] { 4, 3, 2 };
             int[] lowStats = new int[] { 0, 1, 2 };
@@ -14,11 +14,12 @@ namespace BattleMechanics
             randomizeArray(highStats);
             randomizeArray(lowStats);
 
-            this.Attack = attackStats[lowStats[1]];
-            this.Speed = speedStats[highStats[1]];
-            this.Defense = defenseStats[lowStats[0]];
-            this.Health = healthStats[highStats[0]];
-            this.Class = "Assassin";
+            temp.Attack = attackStats[lowStats[1]];
+            temp.Speed = speedStats[highStats[1]];
+            temp.Defense = defenseStats[lowStats[0]];
+            temp.Health = healthStats[highStats[0]];
+            temp.Class = "Healer";
+            base.defineChar(temp);
         }
 
         /* Design Plan
