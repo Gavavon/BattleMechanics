@@ -4,6 +4,6 @@ This code is was originally designed to test stat mechanics and simulate battles
 This code now can auto create characters based on predetermined stats, check duration of battles, check stats, and simulate battles.
 
 How to use Code:
-* The program will show you a list of IDs of each chatater generated.
-* The code will ask for you to submit the unique identifiers for both characters that will battle.
-* The code than gives you the stats for each character and allows you to choose if you want to simulate the battle or check duration of combat.
+* The program will ask you to decide what classes you want to build
+* The code than gives you the stats for each character created
+* Then allows you to choose if you want to simulate the battle or check average duration of combat
