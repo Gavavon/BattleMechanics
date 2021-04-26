@@ -1,8 +1,9 @@
 ﻿/*
  * Creator: Gavin O'Hanlon
  * Created Date: 11/22/2020
- * Revised Date: 04/16/2021 - 04/17/2021
+ * Revised Date: 4/26/2021
  * Github: https://github.com/Gavavon
+ * LinkedIn: https://www.linkedin.com/in/gavinlohanlon/
  * 
  */
 
@@ -23,18 +24,7 @@ using BattleMechanics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-//--IMPORTANT---
-/*  this enables a user to create various kinds of classes for battle. 
- *  You do not know at compile time which specific classes the user will create. 
- *  However, the application has to keep track of all the various types of classes that are created, 
- *  and it has to update them in response to user mouse actions.
- * 
- * This is how you will implment polymorphism via allowing the user to choose what class they want to create instead of creating a selection 
- * 
- * implement different combat mechanics
- * 
- * implement a minimax tree for combat
- */
+
 namespace FightingCombatTest
 {
     /// <summary>
@@ -46,6 +36,8 @@ namespace FightingCombatTest
         //Create participants
         static CharCreator attacker = new CharCreator();
         static CharCreator defender = new CharCreator();
+
+        static List<CharCreator> participants = new List<CharCreator>();
         static void Main(string[] args)
         {
             var types = new List<CharCreator>
@@ -56,10 +48,10 @@ namespace FightingCombatTest
                 new Healer()
             };
 
-
-            List<CharCreator> participants = new List<CharCreator>();
             participants.Add(attacker);
             participants.Add(defender);
+
+            //--- this for loop and while are made for the user to decide what classes they want to use
             Console.WriteLine("Please input the class you want your first participant to be");
             Console.WriteLine("0 for Assassin");
             Console.WriteLine("1 for Tank");
@@ -94,51 +86,67 @@ namespace FightingCombatTest
                 } while (cleared) ;
 
             }
-
-            //this created an attacker and a defender to work with
+            //---
 
             Console.WriteLine("");
-            Console.WriteLine("Participant 1 Info:");
-            info(attacker);
-            Console.WriteLine("Participant 2 Info:");
-            info(defender);
-            //below is a do while statement that allows the user to simulate one of two options
-            //CheckDur will have the attacker attack the defender until the defender is out of health and will return the number of turns
-            //Battle will have the participants attack each other until one has died
+            showParticipants(0);
+
+
+            //--- this do while is for the user to decide what they want to do with the characters
             cleared = true;
             do
             {
+                string[] options = new string[3] { "fight", "check duration", "stop" };
                 Console.WriteLine("");
                 Console.WriteLine("Would you like to: ");
-                Console.WriteLine("Check Combat Duration: CheckDur");
-                Console.WriteLine("Have the Heroes Battle: Battle");
-                Console.WriteLine("End Program: Stop");
+                Console.WriteLine("Have the participants: " + options[0]);
+                Console.WriteLine("Check average duration of combat: " + options[1]);
+                Console.WriteLine("End Program: " + options[2]);
                 Console.WriteLine("");
                 Console.WriteLine("Please input your answer: ");
                 string response = Console.ReadLine();
 
-                if (response.Equals("CheckDur"))
+                if (response.ToLower() == options[0])
                 {
                     Console.WriteLine("");
-                    int counter = 0;
-                    counter = checkDur(defender.Health, counter);
-                    Console.WriteLine("After " + counter + " turns the Defender now has 0 health");
+                    fight(participants[0], participants[1]);
                     cleared = false;
                 }
-                if (response.Equals("Battle"))
+                if (response.ToLower() == options[1])
                 {
-                    Console.WriteLine("");
-                    fight();
+                    duration(participants[0], participants[1]);
                     cleared = false;
                 }
-                if (response.Equals("Stop"))
+                if (response.ToLower() == options[2])
                 {
                     cleared = false;
                 }
 
-            } while (cleared);//an input is invalid redo
-
+            } while (cleared);
+            //---
             //---Program Ends---
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public static int showParticipants(int count) 
+        {
+            if (count >= participants.Count)
+            {
+                return 0;
+            }
+            else 
+            {
+                Console.WriteLine("Participant " + (count + 1) + " Info:");
+                info(participants[count]);
+                count += 1;
+                return showParticipants(count);
+            }
+            
+
+            
         }
 
         /// <summary>
@@ -159,117 +167,99 @@ namespace FightingCombatTest
         }
 
         /// <summary>
-        /// The Fight method decides who goes first it has a compareTo that compares speeds
-        /// and a switch statement that based on the compare to sends the particip[ants to the battle method
-        /// if the speeds are equal it randomly decides who goes first
+        /// 
         /// </summary>
-        public static void fight()
+        public static List<CharCreator> checkFirst(List<CharCreator> parts)
         {
-            int temp = defender.Speed.CompareTo(attacker.Speed);
+            CharCreator hold = new CharCreator();
+            int temp = parts[0].Speed.CompareTo(parts[1].Speed);
             switch (temp)
             {
                 case 1:
-                    Console.WriteLine("The Defender goes first");
-                    battle(defender, attacker);
-                    break;
-                case 0:
+                    return parts;
+                case -1:
+                    hold = parts[0];
+                    parts.RemoveAt(0);
+                    parts.Add(hold);
+                    return parts;
+                default:
                     Random rand = new Random();
                     if (rand.Next(0, 2) == 0)
                     {
-                        Console.WriteLine("The Defender goes first");
-                        battle(defender, attacker);
+                        return parts;
                     }
                     else
                     {
-                        Console.WriteLine("The Attacker goes first");
-                        battle(attacker, defender);
+                        hold = parts[0];
+                        parts.RemoveAt(0);
+                        parts.Add(hold);
+                        return parts;
                     }
-                    break;
-                case -1:
-                    Console.WriteLine("The Attacker goes first");
-                    battle(attacker, defender);
-                    break;
             }
+        }
+        public static void duration(CharCreator part1, CharCreator part2)
+        {
+            Console.WriteLine("");
+            List<CharCreator> fighters = checkFirst(participants);
+            int p1Health;
+            part1 = fighters[0];
+            p1Health = part1.Health;
+            int p2Health;
+            part2 = fighters[1];
+            p2Health = part2.Health;
+            int turn = 0;
+            int averageTurns = 0;
+            int battles = 1000;
 
+            for (int i = 0; i < battles; i++)
+            {
+                while (part1.Health > 0 && part2.Health > 0)
+                {
+                    turn += 1;
+                    part2.Health = part1.attackAction(part1, part2, false);
+                    if (part1.Health > 0 && part2.Health > 0)
+                    {
+                        turn += 1;
+                        part1.Health = part2.attackAction(part2, part1, false);
+                    }
+                }
+                averageTurns += turn;
+                turn = 0;
+                part1.Health = p1Health;
+                part2.Health = p2Health;
+            }
+            averageTurns = averageTurns / battles;
+            Console.WriteLine("");
+            Console.WriteLine("We had these two character battle " + battles + " times");
+            Console.WriteLine("The average turn count per battle is " + averageTurns);
         }
 
-        /// <summary>
-        /// The Battle method takes in two CharCreator objects
-        /// it is designed to be used in the fight method to commence the fighting based on who has the higher speed
-        /// the params are first and second characters based on the speeds decided in the prevous method
-        /// the battle method also decides who wins if they fight based on health and using the runDamage method
-        /// </summary>
-        /// <param name="first"></param>
-        /// <param name="second"></param>
-        public static void battle(CharCreator first, CharCreator second)
+        public static void fight(CharCreator part1, CharCreator part2) 
         {
-            //---This method runs the damage mechanic based on who goes first---
-            while (first.Health > 0 && second.Health > 0)
+            Console.WriteLine("");
+            List<CharCreator> fighters = checkFirst(participants);
+            part1 = fighters[0];
+            part2 = fighters[1];
+            while (part1.Health > 0 && part2.Health > 0)
             {
-                //---This uses the RunDamage method to calculate the damage per turn and alters health based on damage done---
-                first.Health = (runDamage(second.Attack, first.Defense, first.Health, 1));
-                if (first.Health > 0 && second.Health > 0)
+                Console.WriteLine("Fighter 1 attacks");
+                part2.Health = part1.attackAction(part1, part2, true);
+                if (part1.Health > 0 && part2.Health > 0) 
                 {
-                    second.Health = (runDamage(first.Attack, second.Defense, second.Health, 1));
+                    Console.WriteLine("Fighter 2 attacks");
+                    part1.Health = part2.attackAction(part2, part1, true);
                 }
             }
-
-            if (defender.Health > 0)
+            if (part1.Health <= 0)
             {
-                Console.WriteLine("The Defender Won the battle ");
-                Console.WriteLine("Defender's current health: " + defender.Health);
-                Console.WriteLine("Attacker's current health: " + attacker.Health);
+                Console.WriteLine("Fighter 1 lost");
+                Console.WriteLine("Fighter 2 is at " + part2.Health + " Health");
             }
             else
             {
-                Console.WriteLine("The Attacker Won the battle ");
-                Console.WriteLine("Defender's current health: " + defender.Health);
-                Console.WriteLine("Attacker's current health: " + attacker.Health);
+                Console.WriteLine("Fighter 2 lost");
+                Console.WriteLine("Fighter 1 is at " + part1.Health + " Health");
             }
-        }
-
-        /// <summary>
-        /// The checkDur has the attacker attack the defender to test combat duration
-        /// This method utilizes recursion to return counter instead of a simple wh
-        /// the point is to test how long combat would last and how many hits it would take against different classes
-        /// </summary>
-        public static int checkDur(int health, int counter)
-        {
-            if (health <= 0)
-            {
-                return counter;
-            }
-            else 
-            {
-                Console.WriteLine("Defender's current health: " + health);
-                counter += 1;
-                health = (runDamage(attacker.Attack, defender.Defense, health, 1));
-                return checkDur(health, counter);
-            }
-        }
-
-        /// <summary>
-        /// The runDamage method takes in params that a CharCreator Object have particularly
-        /// the attack stat of the attacking object
-        /// the defense stat of the defending object
-        /// the health stat of the defending object
-        /// and the Modifer of the attacking object
-        /// The method will return the health of the defending object after the damage has been done via the equation in the method
-        /// currently no class has a special modifier so it defualts to 1 however that can change
-        /// </summary>
-        /// <param name="atk"></param>
-        /// <param name="def"></param>
-        /// <param name="hp"></param>
-        /// <param name="MOD"></param>
-        /// <returns></returns>
-        public static int runDamage(int atk, int def, int hp, double MOD)
-        {
-            //Damage = (((attacker's attack - Targets Def) * 5) * Any modifiers)
-            int dmg = (int)(((atk - def) * 5) * MOD);
-            //---this isn't needed but generally its nice to see the damage done
-            Console.WriteLine("Total Damage Done: " + dmg);
-            hp = hp - dmg;
-            return hp;
         }
     }
 }

@@ -9,6 +9,12 @@ namespace BattleMechanics
     /// </summary>
     class Fighter : CharCreator
     {
+        /// <summary>
+        /// defineChar in the fighter class is designed for defining stats for any assassin made
+        /// temp is the object that is getting stats applied to it
+        /// this method overrides the defineChar in the CharCreator class so it can recieve a ID
+        /// </summary>
+        /// <param name="temp"></param>
         public override void defineChar(CharCreator temp)
         {
             int[] highStats = new int[] { 1, 2, 3 };

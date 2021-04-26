@@ -9,6 +9,12 @@ namespace BattleMechanics
     /// </summary>
     class Tank : CharCreator
     {
+        /// <summary>
+        /// defineChar in the tank class is designed for defining stats for any assassin made
+        /// temp is the object that is getting stats applied to it
+        /// this method overrides the defineChar in the CharCreator class so it can recieve a ID
+        /// </summary>
+        /// <param name="temp"></param>
         public override void defineChar(CharCreator temp)
         {
             int[] highStats = new int[] { 4, 3, 2 };
@@ -17,11 +23,11 @@ namespace BattleMechanics
             randomizeArray(highStats);
             randomizeArray(lowStats);
 
-            this.Attack = attackStats[lowStats[0]];
-            this.Speed = speedStats[lowStats[1]];
-            this.Defense = defenseStats[highStats[0]];
-            this.Health = healthStats[highStats[1]];
-            this.Class = "Tank";
+            temp.Attack = attackStats[lowStats[0]];
+            temp.Speed = speedStats[lowStats[1]];
+            temp.Defense = defenseStats[highStats[0]];
+            temp.Health = healthStats[highStats[1]];
+            temp.Class = "Tank";
             base.defineChar(temp);
         }
     }
