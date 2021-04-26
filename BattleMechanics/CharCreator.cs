@@ -45,7 +45,8 @@ namespace BattleMechanics
         /// is made it will generate an id for all characters.
         /// 
         /// this is a use of polymorphism effectivly in code so all characters can both assign their individual stats in the classes
-        /// and additionally get their id defined in this class.
+        /// and additionally get their id defined in this class. The ID is not currently used in code however it is designed for easy access
+        /// to identify a character made by the user.
         /// </summary>
         /// <param name="temp"></param>
         public virtual void defineChar(CharCreator temp) 
