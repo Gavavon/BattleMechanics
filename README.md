@@ -7,3 +7,5 @@ How to use Code:
 * The program will ask you to decide what classes you want to build
 * The code than gives you the stats for each character created
 * Then allows you to choose if you want to simulate the battle or check average duration of combat
+
+This code uses best practices and attempts to maximize effeicency by using polymorphism and recursion to miimize operations done.
