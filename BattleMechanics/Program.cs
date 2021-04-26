@@ -127,7 +127,9 @@ namespace FightingCombatTest
             //---Program Ends---
         }
         /// <summary>
-        /// 
+        /// this shows a list of participants by taking in count which should be 0 when first used
+        /// this uses recursion so if the list of participants ever grows past 2 than this will 
+        /// easily still show all information
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
@@ -167,7 +169,9 @@ namespace FightingCombatTest
         }
 
         /// <summary>
-        /// 
+        /// this reorders the list of characters dependant on their speed.
+        /// this can only be done for a list of two however and would need 
+        /// to be adapted for larger lists and groups
         /// </summary>
         public static List<CharCreator> checkFirst(List<CharCreator> parts)
         {
@@ -197,6 +201,14 @@ namespace FightingCombatTest
                     }
             }
         }
+        /// <summary>
+        /// this method checks the average duration of battles
+        /// it takes in the (part1)participant 1 and (part2)participant 2
+        /// this will than have them attack each other until one of them dies to complete a battle
+        /// they will battle 1000 times and keep track of how many turns per battle happen
+        /// </summary>
+        /// <param name="part1"></param>
+        /// <param name="part2"></param>
         public static void duration(CharCreator part1, CharCreator part2)
         {
             Console.WriteLine("");
@@ -233,7 +245,13 @@ namespace FightingCombatTest
             Console.WriteLine("We had these two character battle " + battles + " times");
             Console.WriteLine("The average turn count per battle is " + averageTurns);
         }
-
+        /// <summary>
+        /// This method runs the fighting between two characters
+        /// it takes in the (part1)participant 1 and (part2)participant 2
+        /// this will than have them attack each other until one of them dies
+        /// </summary>
+        /// <param name="part1"></param>
+        /// <param name="part2"></param>
         public static void fight(CharCreator part1, CharCreator part2) 
         {
             Console.WriteLine("");
